@@ -1,4 +1,4 @@
-import { Alert, StyleSheet, Text, View, FlatList, TouchableOpacity, Image, TextInput } from 'react-native';
+import { Alert, StyleSheet, Text, View, FlatList, TouchableOpacity, Image, TextInput, ToastAndroid } from 'react-native';
 import React, { useState } from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { inputData } from './database';
@@ -11,6 +11,7 @@ const todo = () => {
   // let mercyFavourite = food;
 
   const [todos, setTodos] = useState(inputData);
+  let [name, setName] = useState('')
 
   console.log('todos datas ', todos)
 
@@ -29,6 +30,31 @@ const todo = () => {
       },
     ]);
     // setTodos([])
+  };
+
+  const addData = () => {
+    if (name.length < 2) {
+      ToastAndroid.show('enter name', ToastAndroid.SHORT)
+    } else {
+      let newTodo = {
+        id: Math.random(),
+        todo: name,
+        isChecked: false,
+      };
+      setTodos([...todos, newTodo])
+      setName('')
+    }
+  };
+
+  const deleteTodo = (jacob) => {
+    console.log(jacob)
+
+    const newTodo = todos.filter((item) => {
+      return item.id !== jacob
+    });
+
+    setTodos(newTodo)
+
   }
 
   return (
@@ -63,7 +89,7 @@ const todo = () => {
                         }
                         style={{ height: 22, width: 22, marginRight: 10 }} />
                     </TouchableOpacity>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={() => deleteTodo(item.id)}>
                       <Image source={require('../assets/icons/trash.png')} style={{ width: 22, height: 22 }} />
                     </TouchableOpacity>
                   </View>
@@ -77,9 +103,15 @@ const todo = () => {
       {/* Add tasks */}
       <View style={styles.input_container}>
         <View style={styles.input_field}>
-          <TextInput placeholder="Enter a new To-do" placeholderTextColor={'#B7B7B7'} style={{ paddingLeft: 20 }} />
+          <TextInput
+            placeholder="Enter a new To-do"
+            placeholderTextColor={'#B7B7B7'}
+            style={{ paddingLeft: 20 }}
+            value={name}
+            onChangeText={(v) => setName(v)}
+          />
         </View>
-        <TouchableOpacity style={styles.plus_icon}>
+        <TouchableOpacity onPress={() => addData()} style={styles.plus_icon}>
           <Image source={require('../assets/icons/plus.png')} style={{ width: 25, height: 25 }} />
         </TouchableOpacity>
       </View>
