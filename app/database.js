@@ -1,69 +1,15 @@
 export const inputData = [
     {
-        'Todo': 'Tidy my room'
-    },
-
-    {
-        'Todo': 'Deliver the project'
-    },
-
-    {
-        'Todo': 'Post on LinkedIn'
-    },
-
-    {
-        'Todo': 'Post on LinkedIn'
-    },
-
-    {
-        'Todo': 'Post on LinkedIn'
-    },
-
-    {
-        'Todo': 'Post on LinkedIn'
-    },
-    
-    {
-        'Todo': 'Post on LinkedIn'
-    },
-
-    {
-        'Todo': 'Post on LinkedIn'
-    },
-
-    {
-        'Todo': 'Post on LinkedIn'
-    },
-
-    {
-        'Todo': 'Post on LinkedIn'
-    },
-
-    {
-        'Todo': 'Post on LinkedIn'
-    },
-
-    {
-        'Todo': 'Post on LinkedIn'
-    },
-
-    {
-        'Todo': 'Post on LinkedIn'
-    },
-
-    {
-        'Todo': 'Post on LinkedIn'
-    },
-
-    {
-        'Todo': 'Post on LinkedIn'
-    },
-
-    {
-        'Todo': 'Post on LinkedIn'
-    },
-
-    {
-        'Todo': 'Post on LinkedIn'
+        id: 1,
+        todo: "First todo",
+        isChecked: false,
+    }, {
+        id: 2,
+        todo: "Second todo",
+        isChecked: true,
+    }, {
+        id: 3,
+        todo: "Nice todo",
+        isChecked: true,
     },
 ]
