@@ -12,4 +12,4 @@ export const inputData = [
         todo: "Nice todo",
         isChecked: true,
     },
-]
+];

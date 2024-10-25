@@ -1,5 +1,5 @@
-import { StyleSheet, Text, View, FlatList, TouchableOpacity, Image, TextInput } from 'react-native';
-import React from 'react';
+import { Alert, StyleSheet, Text, View, FlatList, TouchableOpacity, Image, TextInput } from 'react-native';
+import React, { useState } from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { inputData } from './database';
 import { StatusBar } from 'expo-status-bar';
@@ -7,12 +7,36 @@ import { StatusBar } from 'expo-status-bar';
 
 const todo = () => {
 
+  // const food = 'eggbuns';
+  // let mercyFavourite = food;
+
+  const [todos, setTodos] = useState(inputData);
+
+  console.log('todos datas ', todos)
+
+  const handleDeleteAll = () => {
+    console.log('ok')
+    Alert.alert('Delete Todos', 'Are you sure?', [
+      {
+        text: 'No',
+        onPress: () => console.log('Cancel Pressed'),
+        style: 'cancel',
+      },
+      {
+        text: 'Yes', onPress: () => {
+          setTodos([])
+        }
+      },
+    ]);
+    // setTodos([])
+  }
+
   return (
     <View style={styles.page_container}>
       {/* HEADER  */}
       <View style={{ marginBottom: 20, flexDirection: 'row', alignItems: 'center', }}>
         <Text style={{ fontSize: 20, color: "black", fontWeight: 'bold', flex: 1 }}>Hi Jacob,</Text>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => handleDeleteAll()} >
           <Icon name="trash" size={25} color="#FF6B6B" />
         </TouchableOpacity>
       </View>
@@ -20,19 +44,23 @@ const todo = () => {
       <StatusBar />
       <View >
         <FlatList
-          data={inputData}
+          data={todos}
           showsVerticalScrollIndicator={false}
           renderItem={({ item }) => {
             return (
               <View style={styles.todo_container}>
                 <View style={{ flexDirection: 'row' }}>
-                  <Text style={{ color: '#333333', fontSize: 16, marginLeft: 20, flex: 1 }}>{item.todo}</Text>
+                  <Text style={{
+                    color: '#333333', fontSize: 16, marginLeft: 20,
+                    flex: 1, textDecorationLine: item.isChecked ? 'line-through' : 'none'
+                  }}>{item.todo}</Text>
                   <View style={{ flexDirection: 'row', alignItems: 'center', paddingHorizontal: 10 }}>
                     <TouchableOpacity >
                       <Image
                         source={item.isChecked
                           ? require('../assets/icons/check2.png')
-                          : require('../assets/icons/check.png')}
+                          : require('../assets/icons/check.png')
+                        }
                         style={{ height: 22, width: 22, marginRight: 10 }} />
                     </TouchableOpacity>
                     <TouchableOpacity>
