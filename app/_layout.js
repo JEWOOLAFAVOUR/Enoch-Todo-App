@@ -7,7 +7,6 @@ import { StatusBar } from 'expo-status-bar';
 
 const todo = () => {
 
-
   // const [todos, setTodos] = useState(inputData);
 
   const [name, setName] = useState("")
