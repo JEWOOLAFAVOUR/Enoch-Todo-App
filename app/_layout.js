@@ -36,12 +36,12 @@ const todo = () => {
         todo: name,
         isChecked: false,
       };
-
       setTodos([...todos, newTodo])
-
       setName('')
-
     }
+  }
+
+  const markTodos = async () => {
 
   }
 
@@ -73,7 +73,7 @@ const todo = () => {
                     flex: 1, textDecorationLine: item.isChecked ? 'line-through' : 'none'
                   }}>{item.todo}</Text>
                   <View style={{ flexDirection: 'row', alignItems: 'center', paddingHorizontal: 10 }}>
-                    <TouchableOpacity >
+                    <TouchableOpacity onPress={() => markTodos()}>
                       <Image
                         source={item.isChecked
                           ? require('../assets/icons/check2.png')
