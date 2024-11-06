@@ -8,7 +8,46 @@ import { StatusBar } from 'expo-status-bar';
 const todo = () => {
 
 
-  const [todos, setTodos] = useState(inputData);
+  // const [todos, setTodos] = useState(inputData);
+
+  const [name, setName] = useState("")
+
+  const [todos, setTodos] = useState([
+    {
+      id: 1,
+      todo: "First todo",
+      isChecked: false,
+    }, {
+      id: 2,
+      todo: "Second todo",
+      isChecked: true,
+    },
+  ]);
+
+
+  const addTodo = async () => {
+    console.log('todo new', name)
+
+    if (name === "") {
+      console.warn("empty todo")
+    } else {
+
+      const newTodo = {
+        id: Math.random(),
+        todo: name,
+        isChecked: false,
+      };
+
+      setTodos([...todos, newTodo])
+
+      setName('')
+
+    }
+
+  }
+
+
+
 
 
   return (
@@ -61,9 +100,11 @@ const todo = () => {
             placeholder="Enter a new To-do"
             placeholderTextColor={'#B7B7B7'}
             style={{ paddingLeft: 20 }}
+            value={name}
+            onChangeText={(k) => setName(k)}
           />
         </View>
-        <TouchableOpacity style={styles.plus_icon}>
+        <TouchableOpacity onPress={() => addTodo()} style={styles.plus_icon}>
           <Image source={require('../assets/icons/plus.png')} style={{ width: 25, height: 25 }} />
         </TouchableOpacity>
       </View>
