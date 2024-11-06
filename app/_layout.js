@@ -23,9 +23,13 @@ const todo = () => {
     },
   ]);
 
+  // todos.map((data, index)=> {
+  //   if(data.if)
+  // })
+
 
   const addTodo = async () => {
-    console.log('todo new', name)
+    // console.log('todo new', name)
 
     if (name === "") {
       console.warn("empty todo")
@@ -41,7 +45,20 @@ const todo = () => {
     }
   }
 
-  const markTodos = async () => {
+  const markTodos = async (sam) => {
+    console.log(sam)
+
+    const helloTodo = todos.map((data, index) => {
+      if (data.id === sam) {
+        data.isChecked = true;
+      }
+      return data;
+    })
+
+    setTodos(helloTodo)
+    console.log(helloTodo)
+
+
 
   }
 
@@ -73,11 +90,14 @@ const todo = () => {
                     flex: 1, textDecorationLine: item.isChecked ? 'line-through' : 'none'
                   }}>{item.todo}</Text>
                   <View style={{ flexDirection: 'row', alignItems: 'center', paddingHorizontal: 10 }}>
-                    <TouchableOpacity onPress={() => markTodos()}>
+                    <TouchableOpacity onPress={() => markTodos(item.id)}>
                       <Image
-                        source={item.isChecked
-                          ? require('../assets/icons/check2.png')
-                          : require('../assets/icons/check.png')
+                        source={
+                          item.isChecked
+                            ?
+                            require('../assets/icons/check2.png')
+                            :
+                            require('../assets/icons/check.png')
                         }
                         style={{ height: 22, width: 22, marginRight: 10 }} />
                     </TouchableOpacity>
